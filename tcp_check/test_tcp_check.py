@@ -14,7 +14,7 @@ CONFIG = {
     'init_config': {},
     'instances': [{
         'host': '127.0.0.1',
-        'port': 65530,
+        'port': 95,
         'timeout': 1,
         'name': 'DownService'
     }, {
@@ -91,7 +91,7 @@ class TCPCheckTest(AgentCheckTest):
         self.service_checks = self.wait_for_async('get_service_checks', 'service_checks', len(CONFIG['instances']))
         self.metrics = self.check.get_metrics()
 
-        expected_tags = ["instance:DownService", "target_host:127.0.0.1", "port:65530"]
+        expected_tags = ["instance:DownService", "target_host:127.0.0.1", "port:95"]
         self.assertServiceCheckCritical("tcp.can_connect", tags=expected_tags)
 
         expected_tags = ["instance:DownService2", "target_host:126.0.0.1", "port:65530", "test1"]
